@@ -17,7 +17,9 @@ const scrapeLogic = async (res) => {
     });
     const page = await browser.newPage();
 
-    await page.goto("https://www.youtube.com/");
+    await page.goto(
+      "https://groww.in/stocks/indian-railway-catering-tourism-corpn-ltd"
+    );
 
     const title = await page.title();
 
