@@ -3,20 +3,21 @@ require("dotenv").config();
 
 const Get52WeekData = async (req, res) => {
   const filter = req.query.filter;
+  const browser = await puppeteer.launch({
+    args: [
+      "--disable-setuid-sandbox",
+      "--no-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    headless: "new",
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
+  });
 
   try {
-    const browser = await puppeteer.launch({
-      args: [
-        "--disable-setuid-sandbox",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote",
-      ],
-      executablePath:
-        process.env.NODE_ENV === "production"
-          ? process.env.PUPPETEER_EXECUTABLE_PATH
-          : puppeteer.executablePath(),
-    });
     const page = await browser.newPage();
 
     await page.goto(`https://ticker.finology.in/market/${filter}`);
@@ -39,11 +40,11 @@ const Get52WeekData = async (req, res) => {
       return list;
     });
 
-    await browser.close();
-
     res.status(200).json(data.splice(2));
   } catch (e) {
     res.send("Something went wrong");
+  } finally {
+    await browser.close();
   }
 };
 
