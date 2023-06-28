@@ -3,7 +3,6 @@ const { scrapeLogic } = require("./scrapeLogic");
 const { AllTopstocks } = require("./AllTopstocks");
 const { AllSectorData } = require("./AllSectorData");
 const { Get52WeekData } = require("./Get52WeekData");
-
 const PORT = process.env.PORT || 3000;
 const app = express();
 
