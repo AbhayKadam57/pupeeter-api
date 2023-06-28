@@ -40,11 +40,11 @@ const Get52WeekData = async (req, res) => {
       return list;
     });
 
+    await browser.close();
+
     res.status(200).json(data.splice(2));
   } catch (e) {
     res.send("Something went wrong");
-  } finally {
-    await browser.close();
   }
 };
 

@@ -62,6 +62,8 @@ const AllSectorData = async (req, res) => {
 
       return data;
     });
+
+    await browser.close();
     // console.log(title);
 
     res.status(200).json(category);
@@ -69,8 +71,6 @@ const AllSectorData = async (req, res) => {
     // cookies.forEach(page.deleteCookie);
   } catch (e) {
     res.send("Something went wrong");
-  } finally {
-    await browser.close();
   }
 };
 

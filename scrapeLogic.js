@@ -82,14 +82,13 @@ const scrapeLogic = async (res) => {
       });
     }
 
+    await browser.close();
     // const cookies = await page.cookies();
     // cookies.forEach(page.deleteCookie);
 
     res.status(200).json(indian_indices);
   } catch (e) {
     res.send("Something went wrong");
-  } finally {
-    await browser.close();
   }
 };
 

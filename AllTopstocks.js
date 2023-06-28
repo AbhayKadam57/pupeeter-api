@@ -62,12 +62,10 @@ const AllTopstocks = async (req, res) => {
     });
     // const cookies = await page.cookies();
     // cookies.forEach(page.deleteCookie);
-
+    await browser.close();
     res.status(200).json(data);
   } catch (e) {
     res.send("Something went wrong");
-  } finally {
-    await browser.close();
   }
 };
 
